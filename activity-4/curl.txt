@@ -1,0 +1,6 @@
+https://moxmwb4irk.execute-api.us-east-1.amazonaws.com/default/act-4
+
+curl -X POST -d "{\"a\":\"9\", \"b\":\"5\", \"op\":\"+\"}" -H "Content-Type: application/json" https://moxmwb4irk.execute-api.us-east-1.amazonaws.com/default/act-4
+
+siege -c5 -d1 -r1 --content-type "application/json" 'https://moxmwb4irk.execute-api.us-east-1.amazonaws.com/default/act-4 POST {"a": "5", "b": "6", "op": "*"}'
+siege -c937 -d1 -r1 --content-type "application/json" 'https://moxmwb4irk.execute-api.us-east-1.amazonaws.com/default/act-4 POST {"a": "5", "b": "6", "op": "*"}'
