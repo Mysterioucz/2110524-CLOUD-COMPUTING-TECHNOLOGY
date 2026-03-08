@@ -31,7 +31,7 @@ resource "aws_iam_role_policy_attachment" "wp_s3_attach" {
   policy_arn = aws_iam_policy.wp_s3_policy.arn
 }
 
-# Create the Instance Profile (This is what you attach to the EC2)
+# Create the Instance Profile
 resource "aws_iam_instance_profile" "wp_profile" {
   name = "WordpressProfile"
   role = aws_iam_role.wp_s3_role.name

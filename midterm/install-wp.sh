@@ -20,7 +20,7 @@ NETPLAN
 netplan apply
 sleep 5
 
-# Install Apache and PHP 8.3 (Ubuntu 24.04 ships PHP 8.3 natively)
+# Install Apache and PHP 8.3
 apt-get update -y
 apt-get install -y \
   apache2 \
@@ -96,7 +96,7 @@ for i in $(seq 1 30); do
   sleep 10
 done
 
-# Get public IP via IMDSv2 (required in ap-southeast-7)
+# Get public IP via IMDSv2
 IMDS_TOKEN=$(curl -s -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
 PUBLIC_IP=$(curl -s -H "X-aws-ec2-metadata-token: $IMDS_TOKEN" http://169.254.169.254/latest/meta-data/public-ipv4)
 
