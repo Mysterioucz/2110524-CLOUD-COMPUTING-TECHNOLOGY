@@ -14,10 +14,8 @@ network:
         use-dns: false
         use-routes: false
       routes:
-        - to: 172.16.2.0/24
-          scope: link
-        - to: 172.16.3.0/24
-          scope: link
+        - to: 172.16.0.0/16
+          via: 172.16.2.1
 NETPLAN
 netplan apply
 sleep 5
