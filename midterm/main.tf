@@ -34,7 +34,7 @@ resource "aws_instance" "wordpress" {
   ami                  = var.ami
   instance_type        = "t3.micro"
   iam_instance_profile = aws_iam_instance_profile.wp_profile.name
-  
+
   subnet_id              = aws_subnet.app_inet.id
   vpc_security_group_ids = [aws_security_group.web_sg.id]
 
@@ -53,7 +53,7 @@ resource "aws_instance" "wordpress" {
 
 resource "aws_db_instance" "database" {
   engine                 = "mariadb"
-  engine_version         = "10.11.8"
+  engine_version         = "11.8.5"
   instance_class         = "db.t3.micro"
   allocated_storage      = 20
   db_subnet_group_name   = aws_db_subnet_group.main.name
@@ -63,4 +63,35 @@ resource "aws_db_instance" "database" {
   db_name                = var.database_name
   username               = var.database_user
   password               = var.database_pass
+}
+resource "aws_s3_bucket" "wp_media" {
+  bucket        = var.bucket_name
+  force_destroy = true
+  tags          = { Name = "Wordpress-Media-Bucket" }
+}
+
+resource "aws_s3_bucket_ownership_controls" "wp_media" {
+  bucket = aws_s3_bucket.wp_media.id
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "wp_media" {
+  bucket = aws_s3_bucket.wp_media.id
+
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
+}
+
+resource "aws_s3_bucket_acl" "wp_media_acl" {
+  depends_on = [
+    aws_s3_bucket_ownership_controls.wp_media,
+    aws_s3_bucket_public_access_block.wp_media,
+  ]
+
+  bucket = aws_s3_bucket.wp_media.id
+  acl    = "public-read"
 }

@@ -1,7 +1,7 @@
 region              = "ap-southeast-7"
 availability_zone_a = "ap-southeast-7a"
 availability_zone_b = "ap-southeast-7b"
-ami                 = "ami-0123c9b6bfb7eb962"
+ami                 = "ami-0630fc0638df720c6"
 bucket_name         = "safetydolphinwalrus010"
 database_name       = "wordpress"
 database_user       = "username"

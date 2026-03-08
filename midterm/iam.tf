@@ -11,10 +11,10 @@ resource "aws_iam_role" "wp_s3_role" {
   })
 }
 
-# Attach S3 Permissions to the Role
-resource "aws_iam_role_policy" "wp_s3_policy" {
-  name = "WordpressS3Policy"
-  role = aws_iam_role.wp_s3_role.id
+# Create IAM Policy for S3 access
+resource "aws_iam_policy" "wp_s3_policy" {
+  name        = "WordpressS3Policy"
+  description = "Allow WordPress to access S3 bucket"
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
@@ -25,7 +25,13 @@ resource "aws_iam_role_policy" "wp_s3_policy" {
   })
 }
 
-# Create the Instance Profile
+# Attach the policy to the role
+resource "aws_iam_role_policy_attachment" "wp_s3_attach" {
+  role       = aws_iam_role.wp_s3_role.name
+  policy_arn = aws_iam_policy.wp_s3_policy.arn
+}
+
+# Create the Instance Profile (This is what you attach to the EC2)
 resource "aws_iam_instance_profile" "wp_profile" {
   name = "WordpressProfile"
   role = aws_iam_role.wp_s3_role.name
