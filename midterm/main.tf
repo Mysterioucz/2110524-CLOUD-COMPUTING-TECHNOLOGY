@@ -31,13 +31,15 @@ resource "aws_db_subnet_group" "main" {
 }
 
 resource "aws_instance" "wordpress" {
-  ami                  = var.ami
-  instance_type        = "t3.micro"
-  iam_instance_profile = aws_iam_instance_profile.wp_profile.name
+  ami                         = var.ami
+  instance_type               = "t3.micro"
+  iam_instance_profile        = aws_iam_instance_profile.wp_profile.name
+  associate_public_ip_address = true
 
   subnet_id              = aws_subnet.app_inet.id
   vpc_security_group_ids = [aws_security_group.web_sg.id]
 
+  user_data_replace_on_change = true
   user_data = templatefile("install-wp.sh", {
     db_pass     = var.database_pass,
     db_user     = var.database_user,

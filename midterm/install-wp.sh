@@ -10,12 +10,12 @@ apt-get install -y \
   php8.3-curl \
   php8.3-xml \
   php8.3-mbstring \
-  php8.3-imagick \
-  php8.3-zip \
   php8.3-gd \
-  php8.3-intl \
+  php-imagick \
+  php-zip \
+  php-intl \
   libapache2-mod-php8.3 \
-  mariadb-client \
+  mariadb-client-core \
   unzip \
   curl
 
