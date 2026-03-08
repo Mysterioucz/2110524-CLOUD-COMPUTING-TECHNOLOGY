@@ -61,6 +61,9 @@ sed -i "s/username_here/${db_user}/g" wp-config.php
 sed -i "s/password_here/${db_pass}/g" wp-config.php
 sed -i "s/localhost/${db_host}/g" wp-config.php
 
+# Force SSL for database connection (required by RDS secure transport)
+sed -i "/\/\* Add any custom values between this line/a define('MYSQL_CLIENT_FLAGS', MYSQLI_CLIENT_SSL);" wp-config.php
+
 # Add S3 offload media configuration using IAM role (no access keys)
 cat >> wp-config.php << 'WPCONFIG'
 
