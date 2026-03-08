@@ -37,8 +37,8 @@ resource "aws_network_interface_attachment" "private_eni_attach" {
   device_index         = 1
 }
 
-# Associate Elastic IP with the Instance's primary interface
+# Associate Elastic IP with the Instance's primary network interface
 resource "aws_eip" "wp_eip" {
-  instance = aws_instance.wordpress.id
-  domain   = "vpc"
+  network_interface = aws_instance.wordpress.primary_network_interface_id
+  domain            = "vpc"
 }
