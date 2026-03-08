@@ -1,9 +1,25 @@
 #!/bin/bash
 set -euxo pipefail
 
-# Bring up the second network interface (private DB subnet)
-ip link set dev ens6 up
-dhclient ens6 || true
+# Configure both network interfaces via netplan
+cat > /etc/netplan/99-interfaces.yaml << 'NETPLAN'
+network:
+  version: 2
+  ethernets:
+    ens5:
+      dhcp4: true
+    ens6:
+      dhcp4: true
+      dhcp4-overrides:
+        use-dns: false
+        use-routes: false
+      routes:
+        - to: 172.16.2.0/24
+          scope: link
+        - to: 172.16.3.0/24
+          scope: link
+NETPLAN
+netplan apply
 sleep 5
 
 # Install Apache and PHP 8.3 (Ubuntu 24.04 ships PHP 8.3 natively)
