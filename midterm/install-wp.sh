@@ -64,20 +64,19 @@ sed -i "s/localhost/${db_host}/g" wp-config.php
 # Force SSL for database connection (required by RDS secure transport)
 sed -i "/\/\* Add any custom values between this line/a define('MYSQL_CLIENT_FLAGS', MYSQLI_CLIENT_SSL);" wp-config.php
 
-# Add S3 offload media configuration using IAM role (no access keys)
-cat >> wp-config.php << 'WPCONFIG'
-
-/** WP Offload Media - S3 Settings (IAM Role) */
-define( 'AS3CF_SETTINGS', serialize( array(
-    'provider' => 'aws',
-    'use-server-roles' => true,
-    'bucket' => '${bucket_name}',
-    'region' => '${region}',
-    'copy-to-s3' => true,
-    'serve-from-s3' => true,
-    'remove-local-file' => false,
-) ) );
-WPCONFIG
+# Add S3 offload media configuration before "stop editing" line
+sed -i "/\/\* That's all, stop editing/i\\
+\\
+\/\*\* WP Offload Media - S3 Settings (IAM Role) \*\/\\
+define( 'AS3CF_SETTINGS', serialize( array(\\
+    'provider' => 'aws',\\
+    'use-server-roles' => true,\\
+    'bucket' => '${bucket_name}',\\
+    'region' => '${region}',\\
+    'copy-to-s3' => true,\\
+    'serve-from-s3' => true,\\
+    'remove-local-file' => false,\\
+) ) );" wp-config.php
 
 # Enable Apache rewrite module
 a2enmod rewrite
