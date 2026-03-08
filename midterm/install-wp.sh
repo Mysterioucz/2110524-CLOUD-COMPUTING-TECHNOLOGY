@@ -1,6 +1,11 @@
 #!/bin/bash
 set -euxo pipefail
 
+# Bring up the second network interface (private DB subnet)
+ip link set dev ens6 up
+dhclient ens6 || true
+sleep 5
+
 # Install Apache and PHP 8.3 (Ubuntu 24.04 ships PHP 8.3 natively)
 apt-get update -y
 apt-get install -y \
