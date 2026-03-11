@@ -1,0 +1,111 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] aws_db_instance.database (expand)" [label = "aws_db_instance.database", shape = "box"]
+		"[root] aws_db_subnet_group.main (expand)" [label = "aws_db_subnet_group.main", shape = "box"]
+		"[root] aws_eip.wp_eip (expand)" [label = "aws_eip.wp_eip", shape = "box"]
+		"[root] aws_iam_instance_profile.wp_profile (expand)" [label = "aws_iam_instance_profile.wp_profile", shape = "box"]
+		"[root] aws_iam_policy.wp_s3_policy (expand)" [label = "aws_iam_policy.wp_s3_policy", shape = "box"]
+		"[root] aws_iam_role.wp_s3_role (expand)" [label = "aws_iam_role.wp_s3_role", shape = "box"]
+		"[root] aws_iam_role_policy_attachment.wp_s3_attach (expand)" [label = "aws_iam_role_policy_attachment.wp_s3_attach", shape = "box"]
+		"[root] aws_instance.wordpress (expand)" [label = "aws_instance.wordpress", shape = "box"]
+		"[root] aws_internet_gateway.main (expand)" [label = "aws_internet_gateway.main", shape = "box"]
+		"[root] aws_network_interface.private_eni (expand)" [label = "aws_network_interface.private_eni", shape = "box"]
+		"[root] aws_network_interface_attachment.private_eni_attach (expand)" [label = "aws_network_interface_attachment.private_eni_attach", shape = "box"]
+		"[root] aws_route.internet (expand)" [label = "aws_route.internet", shape = "box"]
+		"[root] aws_route_table.public (expand)" [label = "aws_route_table.public", shape = "box"]
+		"[root] aws_route_table_association.app_inet (expand)" [label = "aws_route_table_association.app_inet", shape = "box"]
+		"[root] aws_s3_bucket.wp_media (expand)" [label = "aws_s3_bucket.wp_media", shape = "box"]
+		"[root] aws_s3_bucket_acl.wp_media_acl (expand)" [label = "aws_s3_bucket_acl.wp_media_acl", shape = "box"]
+		"[root] aws_s3_bucket_ownership_controls.wp_media (expand)" [label = "aws_s3_bucket_ownership_controls.wp_media", shape = "box"]
+		"[root] aws_s3_bucket_public_access_block.wp_media (expand)" [label = "aws_s3_bucket_public_access_block.wp_media", shape = "box"]
+		"[root] aws_security_group.db_client_sg (expand)" [label = "aws_security_group.db_client_sg", shape = "box"]
+		"[root] aws_security_group.db_sg (expand)" [label = "aws_security_group.db_sg", shape = "box"]
+		"[root] aws_security_group.web_sg (expand)" [label = "aws_security_group.web_sg", shape = "box"]
+		"[root] aws_subnet.app_db_a (expand)" [label = "aws_subnet.app_db_a", shape = "box"]
+		"[root] aws_subnet.app_db_b (expand)" [label = "aws_subnet.app_db_b", shape = "box"]
+		"[root] aws_subnet.app_inet (expand)" [label = "aws_subnet.app_inet", shape = "box"]
+		"[root] aws_vpc.main (expand)" [label = "aws_vpc.main", shape = "box"]
+		"[root] provider[\"registry.opentofu.org/hashicorp/aws\"]" [label = "provider[\"registry.opentofu.org/hashicorp/aws\"]", shape = "diamond"]
+		"[root] var.admin_pass" [label = "var.admin_pass", shape = "note"]
+		"[root] var.admin_user" [label = "var.admin_user", shape = "note"]
+		"[root] var.ami" [label = "var.ami", shape = "note"]
+		"[root] var.availability_zone_a" [label = "var.availability_zone_a", shape = "note"]
+		"[root] var.availability_zone_b" [label = "var.availability_zone_b", shape = "note"]
+		"[root] var.bucket_name" [label = "var.bucket_name", shape = "note"]
+		"[root] var.database_name" [label = "var.database_name", shape = "note"]
+		"[root] var.database_pass" [label = "var.database_pass", shape = "note"]
+		"[root] var.database_user" [label = "var.database_user", shape = "note"]
+		"[root] var.region" [label = "var.region", shape = "note"]
+		"[root] aws_db_instance.database (expand)" -> "[root] aws_db_subnet_group.main (expand)"
+		"[root] aws_db_instance.database (expand)" -> "[root] aws_security_group.db_sg (expand)"
+		"[root] aws_db_instance.database (expand)" -> "[root] var.database_name (expand, reference)"
+		"[root] aws_db_instance.database (expand)" -> "[root] var.database_pass (expand, reference)"
+		"[root] aws_db_instance.database (expand)" -> "[root] var.database_user (expand, reference)"
+		"[root] aws_db_subnet_group.main (expand)" -> "[root] aws_subnet.app_db_a (expand)"
+		"[root] aws_db_subnet_group.main (expand)" -> "[root] aws_subnet.app_db_b (expand)"
+		"[root] aws_eip.wp_eip (expand)" -> "[root] aws_instance.wordpress (expand)"
+		"[root] aws_iam_instance_profile.wp_profile (expand)" -> "[root] aws_iam_role.wp_s3_role (expand)"
+		"[root] aws_iam_policy.wp_s3_policy (expand)" -> "[root] provider[\"registry.opentofu.org/hashicorp/aws\"]"
+		"[root] aws_iam_policy.wp_s3_policy (expand)" -> "[root] var.bucket_name (expand, reference)"
+		"[root] aws_iam_role.wp_s3_role (expand)" -> "[root] provider[\"registry.opentofu.org/hashicorp/aws\"]"
+		"[root] aws_iam_role_policy_attachment.wp_s3_attach (expand)" -> "[root] aws_iam_policy.wp_s3_policy (expand)"
+		"[root] aws_iam_role_policy_attachment.wp_s3_attach (expand)" -> "[root] aws_iam_role.wp_s3_role (expand)"
+		"[root] aws_instance.wordpress (expand)" -> "[root] aws_db_instance.database (expand)"
+		"[root] aws_instance.wordpress (expand)" -> "[root] aws_iam_instance_profile.wp_profile (expand)"
+		"[root] aws_instance.wordpress (expand)" -> "[root] aws_security_group.web_sg (expand)"
+		"[root] aws_instance.wordpress (expand)" -> "[root] aws_subnet.app_inet (expand)"
+		"[root] aws_instance.wordpress (expand)" -> "[root] var.admin_pass (expand, reference)"
+		"[root] aws_instance.wordpress (expand)" -> "[root] var.admin_user (expand, reference)"
+		"[root] aws_instance.wordpress (expand)" -> "[root] var.ami (expand, reference)"
+		"[root] aws_instance.wordpress (expand)" -> "[root] var.bucket_name (expand, reference)"
+		"[root] aws_internet_gateway.main (expand)" -> "[root] aws_vpc.main (expand)"
+		"[root] aws_network_interface.private_eni (expand)" -> "[root] aws_security_group.db_client_sg (expand)"
+		"[root] aws_network_interface.private_eni (expand)" -> "[root] aws_subnet.app_db_a (expand)"
+		"[root] aws_network_interface_attachment.private_eni_attach (expand)" -> "[root] aws_instance.wordpress (expand)"
+		"[root] aws_network_interface_attachment.private_eni_attach (expand)" -> "[root] aws_network_interface.private_eni (expand)"
+		"[root] aws_route.internet (expand)" -> "[root] aws_internet_gateway.main (expand)"
+		"[root] aws_route.internet (expand)" -> "[root] aws_route_table.public (expand)"
+		"[root] aws_route_table.public (expand)" -> "[root] aws_vpc.main (expand)"
+		"[root] aws_route_table_association.app_inet (expand)" -> "[root] aws_route_table.public (expand)"
+		"[root] aws_route_table_association.app_inet (expand)" -> "[root] aws_subnet.app_inet (expand)"
+		"[root] aws_s3_bucket.wp_media (expand)" -> "[root] provider[\"registry.opentofu.org/hashicorp/aws\"]"
+		"[root] aws_s3_bucket.wp_media (expand)" -> "[root] var.bucket_name (expand, reference)"
+		"[root] aws_s3_bucket_acl.wp_media_acl (expand)" -> "[root] aws_s3_bucket_ownership_controls.wp_media (expand)"
+		"[root] aws_s3_bucket_acl.wp_media_acl (expand)" -> "[root] aws_s3_bucket_public_access_block.wp_media (expand)"
+		"[root] aws_s3_bucket_ownership_controls.wp_media (expand)" -> "[root] aws_s3_bucket.wp_media (expand)"
+		"[root] aws_s3_bucket_public_access_block.wp_media (expand)" -> "[root] aws_s3_bucket.wp_media (expand)"
+		"[root] aws_security_group.db_client_sg (expand)" -> "[root] aws_vpc.main (expand)"
+		"[root] aws_security_group.db_sg (expand)" -> "[root] aws_security_group.db_client_sg (expand)"
+		"[root] aws_security_group.web_sg (expand)" -> "[root] aws_vpc.main (expand)"
+		"[root] aws_subnet.app_db_a (expand)" -> "[root] aws_vpc.main (expand)"
+		"[root] aws_subnet.app_db_a (expand)" -> "[root] var.availability_zone_a (expand, reference)"
+		"[root] aws_subnet.app_db_b (expand)" -> "[root] aws_vpc.main (expand)"
+		"[root] aws_subnet.app_db_b (expand)" -> "[root] var.availability_zone_b (expand, reference)"
+		"[root] aws_subnet.app_inet (expand)" -> "[root] aws_vpc.main (expand)"
+		"[root] aws_subnet.app_inet (expand)" -> "[root] var.availability_zone_a (expand, reference)"
+		"[root] aws_vpc.main (expand)" -> "[root] provider[\"registry.opentofu.org/hashicorp/aws\"]"
+		"[root] output.wordpress_public_ip (expand)" -> "[root] aws_eip.wp_eip (expand)"
+		"[root] provider[\"registry.opentofu.org/hashicorp/aws\"] (close)" -> "[root] aws_eip.wp_eip (expand)"
+		"[root] provider[\"registry.opentofu.org/hashicorp/aws\"] (close)" -> "[root] aws_iam_role_policy_attachment.wp_s3_attach (expand)"
+		"[root] provider[\"registry.opentofu.org/hashicorp/aws\"] (close)" -> "[root] aws_network_interface_attachment.private_eni_attach (expand)"
+		"[root] provider[\"registry.opentofu.org/hashicorp/aws\"] (close)" -> "[root] aws_route.internet (expand)"
+		"[root] provider[\"registry.opentofu.org/hashicorp/aws\"] (close)" -> "[root] aws_route_table_association.app_inet (expand)"
+		"[root] provider[\"registry.opentofu.org/hashicorp/aws\"] (close)" -> "[root] aws_s3_bucket_acl.wp_media_acl (expand)"
+		"[root] provider[\"registry.opentofu.org/hashicorp/aws\"]" -> "[root] var.region (expand, reference)"
+		"[root] root" -> "[root] output.wordpress_public_ip (expand)"
+		"[root] root" -> "[root] provider[\"registry.opentofu.org/hashicorp/aws\"] (close)"
+		"[root] var.admin_pass (expand, reference)" -> "[root] var.admin_pass"
+		"[root] var.admin_user (expand, reference)" -> "[root] var.admin_user"
+		"[root] var.ami (expand, reference)" -> "[root] var.ami"
+		"[root] var.availability_zone_a (expand, reference)" -> "[root] var.availability_zone_a"
+		"[root] var.availability_zone_b (expand, reference)" -> "[root] var.availability_zone_b"
+		"[root] var.bucket_name (expand, reference)" -> "[root] var.bucket_name"
+		"[root] var.database_name (expand, reference)" -> "[root] var.database_name"
+		"[root] var.database_pass (expand, reference)" -> "[root] var.database_pass"
+		"[root] var.database_user (expand, reference)" -> "[root] var.database_user"
+		"[root] var.region (expand, reference)" -> "[root] var.region"
+	}
+}
+
