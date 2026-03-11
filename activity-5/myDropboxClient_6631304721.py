@@ -6,7 +6,7 @@ import sys
 
 # --- CONFIGURATION ---
 # TODO: Replace with your actual API Gateway Invoke URL after deployment
-API_URL = "https://xyz123.execute-api.us-east-1.amazonaws.com/prod/dropbox"
+API_URL = "https://09p1vu39ve.execute-api.us-east-1.amazonaws.com/default/activity-5"
 
 current_user = "user"
 
@@ -18,7 +18,7 @@ def main():
     while True:
         try:
             user_input = (
-                input(f"{current_user if current_user else '>>'} ").strip().split()
+                input(f"{current_user if current_user else ''}>> ").strip().split()
             )
         except EOFError:
             break
@@ -48,7 +48,6 @@ def main():
                     "filename": filename,
                     "file_data": b64_data,
                 }
-                # TODO: requests.post(API_URL, json=payload)
                 requests.post(API_URL, json=payload)
                 print("OK")
             except FileNotFoundError:
@@ -56,25 +55,18 @@ def main():
 
         elif cmd == "view":
             # Usage: view
-
-            # TODO: Send 'view' command, print the list of files returned
             payload = {"command": "view", "username": current_user}
             response = requests.post(API_URL, json=payload)
             res = response.json()
-            if res["statusCode"] == 200:
-                body_data = json.loads(res["body"])
-                files = body_data["message"]
-                res = []
-                for file in files:
-                    res.append(
-                        f"{file['filename']} {file['size']} {file['last_modified']} {file['owner']}"
-                    )
-                print("\n".join(res))
+            files = res["message"]
+            res = []
+            for file in files:
+                res.append(
+                    f"{file['filename']} {file['size']} {file['last_modified']} {file['owner']}"
+                )
+            print("\n".join(res))
         elif cmd == "get":
             # Usage: get <filename> [owner_username]
-            # TODO: Handle args. If owner_username not provided, use current_user
-            # TODO: Send request.
-            # TODO: If response contains file data (Base64), decode it and write to file:
             # with open(filename, "wb") as f:
             #     f.write(base64.b64decode(response_data))
             filename = user_input[1]
@@ -85,14 +77,10 @@ def main():
             payload = {"command": "get", "filename": filename, "username": owner}
             response = requests.post(API_URL, json=payload)
             res = response.json()
-            if res["statusCode"] == 200:
-                body_data = json.loads(res["body"])
-                file_data = base64.b64decode(body_data["message"])
-                with open(filename, "wb") as f:
-                    f.write(file_data)
-                print("OK")
-            else:
-                print("Download Error")
+            file_data = base64.b64decode(res["message"])
+            with open(filename, "wb") as f:
+                f.write(file_data)
+            print("OK")
 
 
 if __name__ == "__main__":

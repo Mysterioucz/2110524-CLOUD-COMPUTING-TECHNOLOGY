@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="activity-5-my-dropbox">Activity 5: My DropBox</h1>
+<p>A serverless file storage system built with AWS Lambda, S3, and API Gateway that provides Dropbox-like functionality for uploading, viewing, and downloading files.</p>
+<p><img src="file:///Users/chatrinyoonchalard/Documents/CU/Year-3/2110524-CLOUD-COMPUTING-TECHNOLOGY/activity-5/image.png" alt="System Architecture"></p>
+<h2 id="source-code-files">Source Code Files</h2>
+<h3 id="1-lambdafunctionpy">1. lambda_function.py</h3>
+<p><strong>AWS Lambda Handler for File Operations</strong></p>
+<p>This is the backend serverless function that handles all file operations. It runs on AWS Lambda and is triggered via API Gateway.</p>
+<p><strong>Functionality:</strong></p>
+<ul>
+<li><strong>Database Management</strong>: Uses S3 to store system metadata (user files info) in <code>system/system_data.json</code></li>
+<li><strong>File Upload (PUT)</strong>: Receives base64-encoded files and stores them in S3 under <code>files/{username}/{filename}</code></li>
+<li><strong>File Listing (VIEW)</strong>: Returns a list of files owned by or shared with the requesting user</li>
+<li><strong>File Download (GET)</strong>: Retrieves files from S3 and returns them as base64-encoded data</li>
+<li><strong>Access Control</strong>: Manages file ownership and sharing permissions</li>
+</ul>
+<p><strong>Key Components:</strong></p>
+<ul>
+<li><code>get_db()</code>: Retrieves system metadata from S3</li>
+<li><code>save_db()</code>: Saves updated metadata back to S3</li>
+<li><code>create_file()</code>: Creates file metadata entries</li>
+<li><code>lambda_handler()</code>: Main entry point that routes commands to appropriate handlers</li>
+</ul>
+<h3 id="2-clientpy">2. client.py</h3>
+<p><strong>Command-Line Client for File Operations</strong></p>
+<p>A Python CLI application that interacts with the Lambda function through API Gateway.</p>
+<p><strong>Functionality:</strong></p>
+<ul>
+<li><strong>Interactive Shell</strong>: Provides a command-line interface for file operations</li>
+<li><strong>PUT Command</strong>: Uploads local files to the cloud storage</li>
+<li><strong>VIEW Command</strong>: Lists all accessible files with metadata</li>
+<li><strong>GET Command</strong>: Downloads files from cloud storage to local system</li>
+<li><strong>Base64 Encoding</strong>: Handles binary file conversion for JSON transport</li>
+</ul>
+<p><strong>Commands:</strong></p>
+<ul>
+<li><code>put &lt;filename&gt;</code>: Upload a file</li>
+<li><code>view</code>: List all accessible files</li>
+<li><code>get &lt;filename&gt; [owner]</code>: Download a file</li>
+<li><code>quit</code>: Exit the application</li>
+</ul>
+<hr>
+<h2 id="api-documentation">API Documentation</h2>
+<h3 id="endpoint">Endpoint</h3>
+<pre class="hljs"><code><div>POST &quot;https://09p1vu39ve.execute-api.us-east-1.amazonaws.com/default/activity-5&quot;
+</div></code></pre>
+<h3 id="authentication">Authentication</h3>
+<p>Currently uses username-based identification passed in request body (not production-ready authentication).</p>
+<hr>
+<h2 id="api-operations">API Operations</h2>
+<h3 id="1-upload-file-put">1. Upload File (PUT)</h3>
+<p>Uploads a file to the cloud storage system.</p>
+<p><strong>Request Format:</strong></p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"command"</span>: <span class="hljs-string">"put"</span>,
+  <span class="hljs-attr">"username"</span>: <span class="hljs-string">"user123"</span>,
+  <span class="hljs-attr">"filename"</span>: <span class="hljs-string">"document.pdf"</span>,
+  <span class="hljs-attr">"file_data"</span>: <span class="hljs-string">"base64_encoded_file_content_here..."</span>
+}
+</div></code></pre>
+<p><strong>Request Fields:</strong></p>
+<ul>
+<li><code>command</code> (string, required): Must be &quot;put&quot;</li>
+<li><code>username</code> (string, required): Username of the file owner</li>
+<li><code>filename</code> (string, required): Name of the file</li>
+<li><code>file_data</code> (string, required): Base64-encoded file content</li>
+</ul>
+<p><strong>Response Format:</strong></p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"statusCode"</span>: <span class="hljs-number">200</span>,
+  <span class="hljs-attr">"body"</span>: <span class="hljs-string">"{\"message\": \"Upload Successful\"}"</span>
+}
+</div></code></pre>
+<p><strong>Example using curl:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># First, encode your file to base64</span>
+FILE_B64=$(base64 -i myfile.txt)
+
+<span class="hljs-comment"># Send the request</span>
+curl -X POST <span class="hljs-string">"https://09p1vu39ve.execute-api.us-east-1.amazonaws.com/default/activity-5"</span> \
+  -H <span class="hljs-string">"Content-Type: application/json"</span> \
+  -d <span class="hljs-string">'{
+    "command": "put",
+    "username": "john_doe",
+    "filename": "myfile.txt",
+    "file_data": "'</span><span class="hljs-variable">$FILE_B64</span><span class="hljs-string">'"
+  }'</span>
+</div></code></pre>
+<hr>
+<h3 id="2-list-files-view">2. List Files (VIEW)</h3>
+<p>Retrieves a list of all files accessible to the user.</p>
+<p><strong>Request Format:</strong></p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"command"</span>: <span class="hljs-string">"view"</span>,
+  <span class="hljs-attr">"username"</span>: <span class="hljs-string">"user123"</span>
+}
+</div></code></pre>
+<p><strong>Request Fields:</strong></p>
+<ul>
+<li><code>command</code> (string, required): Must be &quot;view&quot;</li>
+<li><code>username</code> (string, required): Username requesting the file list</li>
+</ul>
+<p><strong>Response Format:</strong></p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"statusCode"</span>: <span class="hljs-number">200</span>,
+  <span class="hljs-attr">"body"</span>: <span class="hljs-string">"{\"message\": [{\"filename\": \"document.pdf\", \"owner\": \"user123\", \"shared_with\": [], \"s3_key\": \"files/user123/document.pdf\", \"size\": 1024, \"last_modified\": \"2026-02-08T10:30:00.123456\"}, {...}]}"</span>
+}
+</div></code></pre>
+<p><strong>Response Fields in message array:</strong></p>
+<ul>
+<li><code>filename</code> (string): Name of the file</li>
+<li><code>owner</code> (string): Username of the file owner</li>
+<li><code>shared_with</code> (array): List of usernames with access</li>
+<li><code>s3_key</code> (string): S3 storage key</li>
+<li><code>size</code> (integer): File size in bytes</li>
+<li><code>last_modified</code> (string): ISO format timestamp</li>
+</ul>
+<p><strong>Example using curl:</strong></p>
+<pre class="hljs"><code><div>curl -X POST <span class="hljs-string">"https://09p1vu39ve.execute-api.us-east-1.amazonaws.com/default/activity-5"</span> \
+  -H <span class="hljs-string">"Content-Type: application/json"</span> \
+  -d <span class="hljs-string">'{
+    "command": "view",
+    "username": "john_doe"
+  }'</span>
+</div></code></pre>
+<hr>
+<h3 id="3-download-file-get">3. Download File (GET)</h3>
+<p>Downloads a specific file from the cloud storage.</p>
+<p><strong>Request Format:</strong></p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"command"</span>: <span class="hljs-string">"get"</span>,
+  <span class="hljs-attr">"username"</span>: <span class="hljs-string">"user123"</span>,
+  <span class="hljs-attr">"filename"</span>: <span class="hljs-string">"document.pdf"</span>
+}
+</div></code></pre>
+<p><strong>Request Fields:</strong></p>
+<ul>
+<li><code>command</code> (string, required): Must be &quot;get&quot;</li>
+<li><code>username</code> (string, required): Owner of the file or user with shared access</li>
+<li><code>filename</code> (string, required): Name of the file to download</li>
+</ul>
+<p><strong>Response Format:</strong></p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"statusCode"</span>: <span class="hljs-number">200</span>,
+  <span class="hljs-attr">"body"</span>: <span class="hljs-string">"{\"message\": \"base64_encoded_file_content_here...\"}"</span>
+}
+</div></code></pre>
+<p>The <code>message</code> field contains the base64-encoded file content that needs to be decoded before saving.</p>
+<p><strong>Example using curl:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Download and decode the file</span>
+curl -X POST <span class="hljs-string">"https://09p1vu39ve.execute-api.us-east-1.amazonaws.com/default/activity-5"</span> \
+  -H <span class="hljs-string">"Content-Type: application/json"</span> \
+  -d <span class="hljs-string">'{
+    "command": "get",
+    "username": "john_doe",
+    "filename": "myfile.txt"
+  }'</span> | jq -r <span class="hljs-string">'.body | fromjson | .message'</span> | base64 -d &gt; downloaded_file.txt
+</div></code></pre>
+<hr>
+<h2 id="setup-instructions">Setup Instructions</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li>AWS Account with Lambda, S3, and API Gateway access</li>
+<li>Python 3.8+</li>
+<li><code>boto3</code> library (for Lambda)</li>
+<li><code>requests</code> library (for client)</li>
+</ul>
+<h3 id="lambda-setup">Lambda Setup</h3>
+<ol>
+<li>Create an S3 bucket named <code>act-5</code> (or update <code>BUCKET_NAME</code> in code)</li>
+<li>Create a Lambda function with Python 3.x runtime</li>
+<li>Upload <code>lambda_function.py</code> as the function code</li>
+<li>Add S3 read/write permissions to the Lambda execution role</li>
+<li>Set appropriate timeout (e.g., 30 seconds) and memory (e.g., 256 MB)</li>
+</ol>
+<h3 id="api-gateway-setup">API Gateway Setup</h3>
+<ol>
+<li>Create a new REST API</li>
+<li>Create a POST method that integrates with your Lambda function</li>
+<li>Enable CORS if needed</li>
+<li>Deploy the API to a stage (e.g., <code>prod</code>)</li>
+<li>Note the Invoke URL</li>
+</ol>
+<h3 id="client-setup">Client Setup</h3>
+<ol>
+<li>Install required Python package:<pre class="hljs"><code><div>pip install requests
+</div></code></pre>
+</li>
+<li>Update <code>API_URL</code> in <code>client.py</code> with your API Gateway endpoint</li>
+<li>Run the client:<pre class="hljs"><code><div>python client.py
+</div></code></pre>
+</li>
+</ol>
+<hr>
+<h2 id="usage-example">Usage Example</h2>
+<pre class="hljs"><code><div>$ python client.py
+Welcome to myDropbox! Type <span class="hljs-string">'help'</span> <span class="hljs-keyword">for</span> commands.
+user put test.txt
+OK
+user view
+test.txt 156 2026-02-08T10:30:00.123456 user
+user get test.txt
+OK
+user quit
+</div></code></pre>
+<hr>
+<h2 id="data-storage-structure">Data Storage Structure</h2>
+<blockquote>
+<p><strong>📝 Implementation Note</strong>: The system architecture diagram above shows <strong>DynamoDB</strong> for metadata storage, which represents the ideal architecture and will be implemented in the next class assignment. However, the <strong>current implementation</strong> (this assignment) uses <strong>S3</strong> (<code>system/system_data.json</code>) to store file metadata for simplicity. The file storage in S3 remains the same in both versions.</p>
+</blockquote>
+<h3 id="current-implementation-s3-based-storage">Current Implementation: S3-Based Storage</h3>
+<p><strong>S3 Bucket Structure:</strong></p>
+<pre class="hljs"><code><div>act-5/
+├── system/
+│   └── system_data.json          # Metadata for all files (current implementation)
+└── files/
+    ├── user1/
+    │   ├── file1.txt
+    │   └── file2.pdf
+    └── user2/
+        └── file3.jpg
+</div></code></pre>
+<p><strong>System Metadata Format (stored in S3):</strong></p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"user"</span>: {},
+  <span class="hljs-attr">"files"</span>: [
+    {
+      <span class="hljs-attr">"filename"</span>: <span class="hljs-string">"document.pdf"</span>,
+      <span class="hljs-attr">"owner"</span>: <span class="hljs-string">"user123"</span>,
+      <span class="hljs-attr">"shared_with"</span>: [],
+      <span class="hljs-attr">"s3_key"</span>: <span class="hljs-string">"files/user123/document.pdf"</span>,
+      <span class="hljs-attr">"size"</span>: <span class="hljs-number">1024</span>,
+      <span class="hljs-attr">"last_modified"</span>: <span class="hljs-string">"2026-02-08T10:30:00.123456"</span>
+    }
+  ]
+}
+</div></code></pre>
+<h3 id="future-implementation-dynamodb--s3">Future Implementation: DynamoDB + S3</h3>
+<p><strong>Architecture (as shown in diagram):</strong></p>
+<ul>
+<li><strong>DynamoDB Table</strong>: Stores user data and file metadata with fast querying capabilities</li>
+<li><strong>S3 Bucket</strong>: Stores actual file content only</li>
+</ul>
+<p><strong>DynamoDB Table Structure (Next Assignment):</strong></p>
+<p><em>Users Table:</em></p>
+<pre class="hljs"><code><div>Primary Key: username (String)
+Attributes: email, created_at, storage_used, etc.
+</div></code></pre>
+<p><em>Files Table:</em></p>
+<pre class="hljs"><code><div>Primary Key: file_id (String)
+Sort Key: owner (String)
+Attributes: filename, s3_key, size, last_modified, shared_with, etc.
+</div></code></pre>
+<p><strong>Benefits of DynamoDB:</strong></p>
+<ul>
+<li>Fast queries and indexed searches</li>
+<li>Better scalability for metadata operations</li>
+<li>Support for complex queries (e.g., find all files shared with user)</li>
+<li>Atomic updates and transactions</li>
+<li>No need to read/write entire metadata file on each operation</li>
+</ul>
+<hr>
+<h2 id="error-handling">Error Handling</h2>
+<ul>
+<li><strong>File Not Found</strong>: Returns &quot;Error: Unknown Command&quot; if command is invalid</li>
+<li><strong>Access Denied</strong>: Only file owner and shared users can view/download files</li>
+<li><strong>Upload Errors</strong>: Check Lambda logs for S3 permission issues</li>
+<li><strong>Client Errors</strong>: Displays &quot;File not found&quot; or &quot;Download Error&quot; for failed operations</li>
+</ul>
+<hr>
+
+</body>
+</html>
