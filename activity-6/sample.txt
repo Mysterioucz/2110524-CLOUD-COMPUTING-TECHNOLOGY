@@ -1,0 +1,13 @@
+a python client -> AWS API Gateway -> AWS Lambda with S3 FullAccess -> AWS S3 for containing user's files, Dynamodb table user for user data (username, password) table files for file ("s3_key": s3_key,  "filename", "owner","size","last_modified":"shared_with")
+python client have these command to send request over http post newuser, login, put, get, view, share
+Q: Which types of user interactions or error scenarios should be represented in the workflow, if any?
+A: User registration failure
+A: Login attempt with invalid credentials
+A: File access by unauthorized users
+
+Q: Would you like to show how shared files are accessed or managed after a user initiates a share action?
+A: Only show the initiation of sharing
+
+Q: Is there any integration with external authentication providers or is all authentication managed within your AWS infrastructure?
+A: no
+
