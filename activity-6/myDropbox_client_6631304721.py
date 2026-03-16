@@ -2,7 +2,6 @@ import requests
 import base64
 
 # --- CONFIGURATION ---
-# TODO: Replace with your actual API Gateway Invoke URL after deployment
 API_URL = (
     "https://ffgpq1coec.execute-api.ap-southeast-7.amazonaws.com/default/cloud-act-6"
 )
@@ -47,14 +46,12 @@ def main():
                 "username": user_input[1],
                 "password": user_input[2],
             }
-            # TODO: Send POST request to API_URL with payload
             response = requests.post(API_URL, json=payload)
             print(response.json()["message"])
             pass
 
         elif cmd == "login":
             # Usage: login <email> <password>
-            # TODO: Send login request. If success, set current_user = username
             if len(user_input) != 3:
                 print(f"3 Arguments needed only {len(user_input)} given")
                 continue
